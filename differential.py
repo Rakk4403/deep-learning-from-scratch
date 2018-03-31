@@ -51,6 +51,21 @@ def numerical_gradient(f, x):
     return grad
 
 
+def gradient_descent(f, init_x, lr=0.01, step_num=100):
+    """
+    f: target function to optimize
+    init_x: initial value
+    lr: learning rate
+    step_num: repeat count for descent method
+    """
+    x = init_x
+
+    for i in range(step_num):
+        grad = numerical_gradient(f, x)
+        x -= lr * grad
+    return x
+
+
 if __name__ == '__main__':
     # check function_1
     x = np.arange(0.0, 20.0, 0.1)
@@ -71,3 +86,8 @@ if __name__ == '__main__':
     print(ret)
     ret = numerical_gradient(function_2, np.array([3.0, 0.0]))
     print(ret)
+
+    # gradient_descent
+    init_x = np.array([-3.0, 4.0])
+    ret = gradient_descent(function_2, init_x=init_x, lr=0.1, step_num=100)
+    print('gradient descent: {}'.format(ret))
