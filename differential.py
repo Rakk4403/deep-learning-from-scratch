@@ -22,6 +22,35 @@ def function_1(x):
     return 0.01 * (x ** 2) + 0.1 * x
 
 
+def function_2(x):
+    # temporary function for partial differenctials
+    return np.sum(x ** 2)  # or x[0]**2 + x[1]**2
+
+
+def numerical_gradient(f, x):
+    """
+    gradient is same as partial differentials
+    """
+    h = 1e-4  # 0.0001
+    grad = np.zeros_like(x)
+
+    for idx in range(x.size):
+        tmp_val = x[idx]
+
+        # f(x+h)
+        x[idx] = tmp_val + h
+        fxh1 = f(x)
+
+        # f(x-h)
+        x[idx] = tmp_val - h
+        fxh2 = f(x)
+
+        grad[idx] = (fxh1 - fxh2) / (2 * h)
+        x[idx] = tmp_val
+
+    return grad
+
+
 if __name__ == '__main__':
     # check function_1
     x = np.arange(0.0, 20.0, 0.1)
@@ -29,7 +58,16 @@ if __name__ == '__main__':
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.plot(x, y)
+    plt.show()
 
     # differential of function_1
-    plt.plot(x, numerical_diff(function_1, x))
-    plt.show()
+    ret = numerical_diff(function_1, 5)
+    print(ret)
+
+    # partial differentials (gradient)
+    ret = numerical_gradient(function_2, np.array([3.0, 4.0]))
+    print(ret)
+    ret = numerical_gradient(function_2, np.array([0.0, 2.0]))
+    print(ret)
+    ret = numerical_gradient(function_2, np.array([3.0, 0.0]))
+    print(ret)
