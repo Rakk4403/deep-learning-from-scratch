@@ -29,8 +29,7 @@ if __name__ == '__main__':
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.plot(x, y)
-    plt.show()
 
     # differential of function_1
-    print(numerical_diff(function_1, 5))
-    print(numerical_diff(function_1, 10))
+    plt.plot(x, numerical_diff(function_1, x))
+    plt.show()
