@@ -4,7 +4,7 @@ import numpy as np
 from differential import numerical_gradient
 from loss_function import cross_entropy_error_for_minibatch
 from output_layer import softmax
-from step_function import sigmoid
+from activation_function import sigmoid
 
 
 class TwoLayerNet:

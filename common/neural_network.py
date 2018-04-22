@@ -1,5 +1,5 @@
 import numpy as np
-from step_function import sigmoid
+from activation_function import sigmoid
 
 
 def init_network():
