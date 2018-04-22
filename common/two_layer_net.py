@@ -1,9 +1,10 @@
 # author: rakk4403
 import numpy as np
 
-from .differential import numerical_gradient, softmax
-from .loss_function import cross_entropy_error_for_minibatch
-from .step_function import sigmoid
+from differential import numerical_gradient
+from loss_function import cross_entropy_error_for_minibatch
+from output_layer import softmax
+from step_function import sigmoid
 
 
 class TwoLayerNet:
@@ -54,3 +55,11 @@ class TwoLayerNet:
             'b2': numerical_gradient(loss_W, self.params['b2'])
         }
         return grads
+
+
+if __name__ == '__main__':
+    net = TwoLayerNet(input_size=784, hidden_size=100, output_size=10)
+    print(net.params['W1'].shape)  # (784, 100)
+    print(net.params['b1'].shape)  # (100, )
+    print(net.params['W2'].shape)  # (100, 10)
+    print(net.params['b2'].shape)  # (10, )
